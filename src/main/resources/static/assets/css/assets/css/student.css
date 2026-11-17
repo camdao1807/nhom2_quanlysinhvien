@@ -1,0 +1,77 @@
+body {
+  min-height: 100vh;
+  background: #f4f6f9;
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(13, 110, 253, 0.08);
+  border: 1px solid rgba(13, 110, 253, 0.12);
+}
+
+.user-chip small {
+  display: block;
+  color: #6c757d;
+}
+
+.table-actions {
+  display: inline-flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.table-actions form {
+  display: inline-flex;
+}
+
+.table-actions .btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #dfe3e8;
+  color: #212529;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.table-actions .btn:hover,
+.table-actions .btn:focus {
+  opacity: 0.85;
+}
+
+/* Sửa lại phần này để các nút hành động có màu sắc và hiện icon rõ ràng */
+.table-actions .btn-info {
+  background: #0dcaf0 !important;
+  border-color: #0dcaf0 !important;
+  color: #ffffff !important;
+}
+
+.table-actions .btn-warning {
+  background: #ffc107 !important;
+  border-color: #ffc107 !important;
+  color: #ffffff !important;
+}
+
+.table-actions .btn-danger {
+  background: #dc3545 !important;
+  border-color: #dc3545 !important;
+  color: #ffffff !important;
+}
+
+.table-actions .btn i {
+  color: inherit !important;
+}
+
+.form-card {
+  max-width: 820px;
+  margin: 40px auto;
+}

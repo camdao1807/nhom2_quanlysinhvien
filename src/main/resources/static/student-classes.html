@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý lớp học | SM University</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/assets/css/student-status.css?v=2">
+    <link rel="stylesheet" href="/assets/css/student-classes.css?v=2">
+</head>
+<body>
+
+<aside class="sm-sidebar">
+    <div class="sm-brand">
+        <a href="index.html" class="brand-link">
+            <span class="sm-logo">SM</span>
+            <span class="sm-brand-text"><strong>SM UNIVERSITY</strong><small>QL SINH VIÊN</small></span>
+        </a>
+    </div>
+    <div class="sm-section">Điều hành chính</div>
+    <ul class="sm-menu">
+        <li><a href="index.html" class="sm-link"><i class="bi bi-mortarboard"></i><span>Quản lý sinh viên</span></a></li>
+        <li><a href="student-classes.html" class="sm-link active"><i class="bi bi-building"></i><span>Lớp học</span></a></li>
+        <li><a href="student-classe-sections.html" class="sm-link"><i class="bi bi-diagram-3"></i><span>Phân lớp sinh viên</span></a></li>
+        <li><a href="advisor-classe-sections.html" class="sm-link"><i class="bi bi-person-badge"></i><span>Giảng viên / CVHT</span></a></li>
+        <li><a href="student-status.html" class="sm-link"><i class="bi bi-card-checklist"></i><span>Trạng thái sinh viên</span></a></li>
+    </ul>
+</aside>
+
+<header class="topbar">
+    <button class="icon-btn" id="sidebarToggle" aria-label="Thu gọn menu"><i class="bi bi-list"></i></button>
+    <div class="topbar-main">
+        <nav class="crumbs">
+            <i class="bi bi-house"></i>
+            <a href="index.html">Trang chủ</a><span>/</span>
+            <strong>Lớp học</strong>
+        </nav>
+        <label class="global-search">
+            <i class="bi bi-search"></i>
+            <input type="text" id="globalSearch" placeholder="Tìm kiếm lớp học...">
+            <kbd>Ctrl+K</kbd>
+        </label>
+        <div class="today" id="todayText">--</div>
+    </div>
+    <div class="topbar-right">
+        <button class="btn-primary" id="btnAddTop"><i class="bi bi-plus-lg"></i> Thêm mới</button>
+        <button class="icon-btn has-badge" aria-label="Thông báo"><i class="bi bi-bell"></i><span class="badge">3</span></button>
+        <button class="icon-btn" aria-label="Trợ giúp"><i class="bi bi-question-circle"></i></button>
+        <div class="profile">
+            <div class="avatar avatar-blue"><i class="bi bi-person"></i></div>
+            <div><b>Quản trị viên</b><small>Phòng Đào tạo</small></div>
+        </div>
+    </div>
+</header>
+
+<main class="main">
+    <div class="page">
+
+        <div class="print-head">
+            <h2>DANH SÁCH LỚP HỌC</h2>
+            <div id="printInfo"></div>
+        </div>
+
+        <section class="page-head">
+            <div class="page-title">
+                <div class="title-icon"><i class="bi bi-building"></i></div>
+                <div>
+                    <h1>Quản lý lớp học <span class="term-badge" id="termBadge">--</span></h1>
+                    <p>Quản lý danh sách lớp hành chính, sĩ số và tình trạng hoạt động toàn trường.</p>
+                </div>
+            </div>
+            <div class="page-actions">
+                <button class="btn-soft" id="btnPrint"><i class="bi bi-printer"></i> In danh sách</button>
+                <button class="btn-primary" id="btnAdd"><i class="bi bi-plus-circle"></i> Thêm lớp học</button>
+            </div>
+        </section>
+
+        <section class="kpi-grid five" id="stats"></section>
+
+        <section class="card table-card">
+            <div class="toolbar">
+                <label class="field-search">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="fSearch" placeholder="Tìm theo mã lớp, tên lớp...">
+                </label>
+                <select id="fStatus" class="select">
+                    <option value="">Trạng thái: Tất cả</option>
+                    <option value="on">Hoạt động</option>
+                    <option value="off">Tạm dừng</option>
+                    <option value="done">Đã đóng</option>
+                </select>
+                <select id="fYear" class="select"><option value="">Khóa: Tất cả</option></select>
+                <select id="fTeacher" class="select"><option value="">GVCN: Tất cả</option></select>
+                <button class="icon-btn outline" id="btnReset" aria-label="Đặt lại bộ lọc" title="Đặt lại"><i class="bi bi-arrow-counterclockwise"></i></button>
+            </div>
+
+            <div class="meta-row">
+                <span>Hiển thị <b id="shownCount">0</b> / <b id="totalCount">0</b> lớp học</span>
+                <span class="sync"><i class="bi bi-arrow-repeat"></i> <span id="syncText">Đồng bộ dữ liệu lúc --</span></span>
+                <span class="legend">
+                    <i class="lg lg-green"></i>Hoạt động
+                    <i class="lg lg-yellow"></i>Tạm dừng
+                    <i class="lg lg-gray"></i>Đã đóng
+                </span>
+            </div>
+
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width:48px">STT</th>
+                            <th>MÃ LỚP</th>
+                            <th>TÊN LỚP HỌC</th>
+                            <th>KHÓA / NHẬP HỌC</th>
+                            <th>GIẢNG VIÊN CVHT</th>
+                            <th>SĨ SỐ</th>
+                            <th>TRẠNG THÁI</th>
+                            <th class="col-act" style="text-align:right">HÀNH ĐỘNG</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+
+            <div class="pager">
+                <span id="pagerInfo">--</span>
+                <div class="pager-btns" id="pagerBtns"></div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Hộp thoại thêm / sửa lớp -->
+<dialog id="classDialog" class="dlg">
+    <div class="dlg-head"><h2 id="modalTitle">Thêm lớp học</h2><button type="button" class="dlg-close" data-close aria-label="Đóng"><i class="bi bi-x-lg"></i></button></div>
+    <div class="dlg-body">
+        <div><label class="lbl" for="mCode">Mã lớp</label><input id="mCode" class="input" placeholder="IT26-01"></div>
+        <div><label class="lbl" for="mName">Tên lớp học</label><input id="mName" class="input" placeholder="Lớp hành chính IT26-01"></div>
+        <div class="two-col">
+            <div><label class="lbl" for="mYear">Năm nhập học</label><input id="mYear" type="number" class="input" value="2026"></div>
+            <div><label class="lbl" for="mMax">Sĩ số tối đa</label><input id="mMax" type="number" class="input" value="40"></div>
+        </div>
+        <div><label class="lbl" for="mTeacher">Giảng viên CVHT</label><input id="mTeacher" class="input" placeholder="Nguyễn Văn A"></div>
+        <div><label class="lbl" for="mStatus">Trạng thái</label>
+            <select id="mStatus" class="select full">
+                <option value="on">Hoạt động</option>
+                <option value="off">Tạm dừng</option>
+                <option value="done">Đã đóng</option>
+            </select>
+        </div>
+        <div class="err" id="mErr"></div>
+    </div>
+    <div class="dlg-foot">
+        <button type="button" class="btn-soft" data-close>Hủy</button>
+        <button type="button" class="btn-primary" id="btnSave"><i class="bi bi-check2-circle"></i> Lưu lớp học</button>
+    </div>
+</dialog>
+
+<!-- Hộp thoại danh sách sinh viên của lớp -->
+<dialog id="studentDialog" class="dlg dlg-lg">
+    <div class="dlg-head">
+        <div>
+            <h2 id="sTitle"></h2>
+            <div class="sub" id="sSub"></div>
+            <div class="sub print-only" id="sPrintInfo"></div>
+        </div>
+        <div class="dlg-tools">
+            <button type="button" class="btn-soft btn-sm" id="btnPrintStudents"><i class="bi bi-printer"></i> In danh sách</button>
+            <button type="button" class="dlg-close" data-close aria-label="Đóng"><i class="bi bi-x-lg"></i></button>
+        </div>
+    </div>
+    <div class="dlg-scroll">
+        <table class="data-table">
+            <thead><tr><th style="width:60px">STT</th><th>MÃ SINH VIÊN</th><th>HỌ VÀ TÊN</th><th>NGÀY SINH</th><th>GIỚI TÍNH</th></tr></thead>
+            <tbody id="sBody"></tbody>
+        </table>
+    </div>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="/assets/js/student-classes.js?v=2"></script>
+</body>
+</html>

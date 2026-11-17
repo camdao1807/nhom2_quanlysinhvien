@@ -1,0 +1,61 @@
+/* Trang Lớp học — phần bổ sung. Nạp SAU student-status.css */
+
+.kpi-blue{--c:var(--primary);--cs:var(--primary-soft)}
+.kpi-grid.five{grid-template-columns:repeat(5,1fr)}
+.lg-gray{background:#9ca3af}
+.btn-sm{height:32px;padding:0 11px;font-size:12px}
+.sub{color:var(--muted);font-size:12px}
+
+.data-table{min-width:900px}
+.code-tag{display:inline-block;padding:3px 8px;border-radius:5px;background:var(--primary-soft);color:#1e3a8a;font:700 11.5px ui-monospace,Consolas,monospace}
+.cname{font-weight:600;font-size:13px}
+.cname-link{color:var(--text)}
+.cname-link:hover{color:var(--primary);text-decoration:underline}
+.size-cell{min-width:110px}
+.size-cell b{font-size:12.5px}
+.prog-bar{height:6px;width:90px;margin-top:5px;border-radius:99px;background:#e9edf3;overflow:hidden}
+.prog-bar span{display:block;height:100%;border-radius:99px;background:var(--primary)}
+
+.act{width:32px;height:32px;border:1px solid var(--border);background:#fff;border-radius:7px;color:#5b6472;font-size:14px;margin-left:4px}
+.act:hover{background:#f3f4f6}
+.act.del:hover{background:var(--red-soft);color:var(--red);border-color:#f8c5cc}
+
+/* Hộp thoại */
+.dlg{border:0;border-radius:var(--radius);padding:0;width:min(480px,92vw);box-shadow:0 20px 50px rgba(15,23,42,.25);color:var(--text)}
+.dlg-lg{width:min(760px,94vw)}
+.dlg::backdrop{background:rgba(15,23,42,.45)}
+.dlg-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border)}
+.dlg-head h2{margin:0;font-size:16px;font-weight:700}
+.dlg-tools{display:flex;align-items:center;gap:8px}
+.dlg-close{border:0;background:none;font-size:15px;color:var(--muted);width:30px;height:30px}
+.dlg-body{display:flex;flex-direction:column;gap:12px;padding:16px 20px}
+.dlg-body .step,.dlg-body .two-col{margin:0}
+.dlg-foot{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;background:#f7f8fb;border-top:1px solid var(--border)}
+.dlg-scroll{max-height:60vh;overflow:auto}
+.dlg-scroll .data-table{min-width:0}
+.err{color:var(--red);font-size:12px;min-height:16px}
+
+.print-head,.print-only{display:none}
+
+@media (max-width:1280px){.kpi-grid.five{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.kpi-grid.five{grid-template-columns:1fr}}
+
+@media print{
+    .print-head{display:block;text-align:center;margin-bottom:12px}
+    .col-act,.data-table td:last-child{display:none!important}
+    .meta-row,.legend{display:none!important}
+
+    /* In danh sách sinh viên của một lớp */
+    body.print-students .sm-sidebar,
+    body.print-students .topbar,
+    body.print-students .main,
+    body.print-students .toast,
+    body.print-students #classDialog,
+    body.print-students .dlg-tools{display:none!important}
+    body.print-students #studentDialog{position:static;display:block;width:100%;box-shadow:none}
+    body.print-students .dlg-head{justify-content:center;text-align:center;border:0}
+    body.print-students .dlg-head h2{font-size:22px;text-transform:uppercase}
+    body.print-students .dlg-scroll{max-height:none;overflow:visible}
+    body.print-students .print-only{display:block}
+    body.print-students #studentDialog .data-table td:last-child{display:table-cell!important}
+}

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân lớp sinh viên | SM University</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/assets/css/student-status.css?v=2">
+    <link rel="stylesheet" href="/assets/css/student-classe-sections.css?v=2">
+</head>
+<body>
+
+<aside class="sm-sidebar">
+    <div class="sm-brand">
+        <a href="index.html" class="brand-link">
+            <span class="sm-logo">SM</span>
+            <span class="sm-brand-text"><strong>SM UNIVERSITY</strong><small>QL SINH VIÊN</small></span>
+        </a>
+    </div>
+    <div class="sm-section">Điều hành chính</div>
+    <ul class="sm-menu">
+        <li><a href="index.html" class="sm-link"><i class="bi bi-mortarboard"></i><span>Quản lý sinh viên</span></a></li>
+        <li><a href="student-classes.html" class="sm-link"><i class="bi bi-building"></i><span>Lớp học</span></a></li>
+        <li><a href="student-classe-sections.html" class="sm-link active"><i class="bi bi-diagram-3"></i><span>Phân lớp sinh viên</span></a></li>
+        <li><a href="advisor-classe-sections.html" class="sm-link"><i class="bi bi-person-badge"></i><span>Giảng viên / CVHT</span></a></li>
+        <li><a href="student-status.html" class="sm-link"><i class="bi bi-card-checklist"></i><span>Trạng thái sinh viên</span></a></li>
+    </ul>
+</aside>
+
+<header class="topbar">
+    <button class="icon-btn" id="sidebarToggle" aria-label="Thu gọn menu"><i class="bi bi-list"></i></button>
+    <div class="topbar-main">
+        <nav class="crumbs">
+            <i class="bi bi-house"></i>
+            <a href="index.html">Trang chủ</a><span>/</span>
+            <strong>Phân lớp sinh viên</strong>
+        </nav>
+        <label class="global-search">
+            <i class="bi bi-search"></i>
+            <input type="text" id="globalSearch" placeholder="Tìm kiếm sinh viên, lớp...">
+            <kbd>Ctrl+K</kbd>
+        </label>
+        <div class="today" id="todayText">--</div>
+    </div>
+    <div class="topbar-right">
+        <button class="btn-primary" id="btnAddNew"><i class="bi bi-plus-lg"></i> Thêm mới</button>
+        <button class="icon-btn has-badge" aria-label="Thông báo"><i class="bi bi-bell"></i><span class="badge">3</span></button>
+        <button class="icon-btn" aria-label="Trợ giúp"><i class="bi bi-question-circle"></i></button>
+        <div class="profile">
+            <div class="avatar avatar-blue"><i class="bi bi-person"></i></div>
+            <div><b>Quản trị viên</b><small>Phòng Đào tạo</small></div>
+        </div>
+    </div>
+</header>
+
+<main class="main">
+    <div class="page">
+
+        <section class="page-head">
+            <div class="page-title">
+                <div class="title-icon"><i class="bi bi-diagram-3"></i></div>
+                <div>
+                    <h1>Phân lớp sinh viên <span class="term-badge" id="termBadge">--</span></h1>
+                    <p id="pageSubtitle">Đang tải dữ liệu...</p>
+                </div>
+            </div>
+            <div class="page-actions">
+                <button class="btn-soft" id="btnAutoAssign"><i class="bi bi-lightning-charge"></i> Phân lớp tự động</button>
+                <button class="btn-primary" id="btnSaveAll"><i class="bi bi-save"></i> Lưu &amp; Ban hành</button>
+            </div>
+        </section>
+
+        <section class="kpi-grid">
+            <article class="kpi kpi-blue">
+                <header><span class="kpi-label"><i class="dot"></i>TỔNG SV CẦN PHÂN</span><span class="kpi-icon"><i class="bi bi-people"></i></span></header>
+                <div class="kpi-value"><span id="statTotal">0</span><small>SV</small></div>
+                <footer><span>Sinh viên đang hoạt động</span></footer>
+                <div class="bar"><i id="barTotal"></i></div>
+            </article>
+            <article class="kpi kpi-green">
+                <header><span class="kpi-label"><i class="dot"></i>ĐÃ PHÂN VÀO LỚP</span><span class="kpi-icon"><i class="bi bi-person-check"></i></span></header>
+                <div class="kpi-value"><span id="statAssigned">0</span><small>SV</small></div>
+                <footer><span class="kpi-note"><i class="bi bi-graph-up-arrow"></i> <b id="statPercent">0%</b></span><span>Đã có lớp hành chính</span></footer>
+                <div class="bar"><i id="barAssigned"></i></div>
+            </article>
+            <article class="kpi kpi-red">
+                <header><span class="kpi-label"><i class="dot"></i>CHƯA XẾP LỚP</span><span class="kpi-icon"><i class="bi bi-exclamation-triangle"></i></span></header>
+                <div class="kpi-value"><span id="statPending">0</span><small>SV</small></div>
+                <footer><span class="kpi-note"><i class="bi bi-exclamation"></i> <b id="statPendingPct">0%</b></span><span>Cần xếp lớp hành chính</span></footer>
+                <div class="bar"><i id="barPending"></i></div>
+            </article>
+            <article class="kpi kpi-gray">
+                <header><span class="kpi-label"><i class="dot"></i>LỚP HÀNH CHÍNH MỞ</span><span class="kpi-icon"><i class="bi bi-building"></i></span></header>
+                <div class="kpi-value"><span id="statClasses">0</span><small>LỚP</small></div>
+                <footer><span id="statClassNote">Đang tải...</span></footer>
+                <div class="bar"><i id="barClasses"></i></div>
+            </article>
+        </section>
+
+        <section class="content-grid">
+
+            <!-- ===== Danh sách chờ ===== -->
+            <div class="card table-card">
+                <div class="toolbar">
+                    <label class="field-search">
+                        <i class="bi bi-search"></i>
+                        <input type="text" id="filterKeyword" placeholder="Tìm theo mã hồ sơ, họ tên...">
+                    </label>
+                    <select id="filterMajor" class="select"><option value="all">Ngành: Tất cả</option></select>
+                    <select id="filterStatus" class="select">
+                        <option value="">Trạng thái: Tất cả</option>
+                        <option value="wait">Chưa xếp lớp</option>
+                        <option value="temp">Tạm gán</option>
+                    </select>
+                    <select id="filterSex" class="select">
+                        <option value="">Giới tính: Tất cả</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                    <button class="icon-btn outline" id="btnReset" aria-label="Đặt lại bộ lọc" title="Đặt lại"><i class="bi bi-arrow-counterclockwise"></i></button>
+                    <button class="icon-btn outline" id="btnRefresh" aria-label="Làm mới" title="Làm mới"><i class="bi bi-arrow-clockwise"></i></button>
+                </div>
+
+                <div class="meta-row">
+                    <span>Danh sách chờ phân lớp: <b id="pendingBadge">0 SV</b></span>
+                    <span class="sync"><i class="bi bi-arrow-repeat"></i> <span id="syncText">Đồng bộ dữ liệu lúc --</span></span>
+                </div>
+
+                <div class="selection-bar">
+                    <label class="chk"><input type="checkbox" id="checkAll"> Đã chọn: <b id="selectedCount">0 sinh viên</b></label>
+                    <div class="sel-actions">
+                        <button class="btn-soft btn-sm" id="btnRandom"><i class="bi bi-shuffle"></i> Gán ngẫu nhiên</button>
+                        <button class="btn-primary btn-sm" id="btnAssignSelected">Gán vào lớp đã chọn <i class="bi bi-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:40px"></th>
+                                <th style="width:48px">STT</th>
+                                <th>MÃ HỒ SƠ</th>
+                                <th>HỌ VÀ TÊN</th>
+                                <th>NGÀNH</th>
+                                <th>NĂM NHẬP HỌC</th>
+                                <th>ĐỊA CHỈ</th>
+                                <th>TRẠNG THÁI</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentRows"></tbody>
+                    </table>
+                </div>
+
+                <div class="pager">
+                    <span id="pagingInfo">--</span>
+                    <div class="pager-btns" id="pagerBtns"></div>
+                </div>
+            </div>
+
+            <!-- ===== Lớp tiếp nhận + cân bằng ===== -->
+            <aside class="side">
+                <div class="card side-card">
+                    <div class="side-head">
+                        <div><b><i class="bi bi-building"></i> Lớp hành chính tiếp nhận</b><small>Bấm vào lớp để chọn lớp mục tiêu.</small></div>
+                        <span class="pill pill-gray" id="classBadge">0 lớp</span>
+                    </div>
+                </div>
+
+                <div id="classCards"></div>
+
+                <div class="card side-card">
+                    <div class="side-head">
+                        <b><i class="bi bi-bar-chart-steps"></i> Cân bằng đào tạo</b>
+                        <span class="pill pill-gray" id="balStd">Độ lệch chuẩn: –</span>
+                    </div>
+                    <div class="bal">
+                        <div class="bal-row"><span>Phân bổ giới tính chung</span><b id="balGenderText">–</b></div>
+                        <div class="mbar"><span id="balMaleBar"></span><span id="balFemaleBar" class="alt"></span></div>
+                    </div>
+                    <div class="bal">
+                        <div class="bal-row"><span>Chênh lệch sĩ số giữa các lớp</span><b id="balGapText">–</b></div>
+                        <div class="mbar"><span id="balGapBar"></span></div>
+                    </div>
+                    <div class="bal">
+                        <div class="bal-row"><span>Mức lấp đầy chỉ tiêu</span><b id="balFillText">–</b></div>
+                        <div class="mbar"><span id="balFillBar"></span></div>
+                    </div>
+                </div>
+
+                <div class="rule">
+                    <i class="bi bi-info-circle"></i>
+                    <p><b>Quy chuẩn định mức:</b> sĩ số mỗi lớp hành chính từ 60 đến 70 sinh viên; ưu tiên cân bằng giới tính, điểm đầu vào và vùng miền giữa các lớp cùng ngành.</p>
+                </div>
+            </aside>
+        </section>
+    </div>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="/assets/js/student-classe-sections.js?v=2"></script>
+</body>
+</html>

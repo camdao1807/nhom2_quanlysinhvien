@@ -1,0 +1,162 @@
+/* =========================================================
+   Trang Giảng viên / CVHT — chỉ phần bổ sung.
+   Nạp SAU student-status.css (dùng chung biến, layout, bảng, KPI...)
+   ========================================================= */
+
+/* KPI thêm 2 tông màu */
+.kpi-blue{--c:var(--primary);--cs:var(--primary-soft)}
+.kpi-gray{--c:#64748b;--cs:#eef1f6}
+
+/* Bảng 11 cột */
+.data-table{min-width:1120px}
+.code-tag{
+    display:inline-block;padding:3px 8px;border-radius:5px;background:var(--primary-soft);
+    color:#1e3a8a;font:700 11.5px ui-monospace,Consolas,monospace;
+}
+.td-term{white-space:nowrap;font-size:12px}
+.td-term small{display:block;color:var(--muted);margin-top:2px}
+
+/* Tiến độ nhiệm kỳ */
+.prog{min-width:110px}
+.prog-text{font-size:11.5px;font-weight:600;color:var(--green);margin-bottom:4px}
+.prog-text.done{color:var(--muted)}
+.prog-bar{height:6px;border-radius:99px;background:#e9edf3;overflow:hidden}
+.prog-bar span{display:block;height:100%;border-radius:99px;background:var(--green)}
+.prog-bar.done span{background:#94a3b8}
+
+/* Nút xem hồ sơ */
+.btn-eye{
+    width:32px;height:32px;border:1px solid var(--border);border-radius:7px;background:#fff;
+    color:#5b6472;font-size:15px;transition:.15s;
+}
+.btn-eye:hover{background:var(--primary);border-color:var(--primary);color:#fff}
+
+/* Form thêm / sửa */
+.form-card{padding:16px;margin-bottom:16px}
+.form-card h2{margin:0 0 14px;font-size:15px;font-weight:700}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.form-actions{display:flex;gap:8px;margin-top:14px}
+.btn-danger-soft{background:var(--red-soft);color:var(--red);border-color:#f8c5cc}
+.btn-danger-soft:hover{background:#fbd5da}
+.btn-sm{height:32px;padding:0 11px;font-size:12px}
+
+/* Hộp thoại hồ sơ */
+.profile-dialog{
+    border:0;border-radius:var(--radius);padding:0;width:min(520px,92vw);
+    box-shadow:0 20px 50px rgba(15,23,42,.25);color:var(--text);
+}
+.profile-dialog::backdrop{background:rgba(15,23,42,.45)}
+.pf-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border);position:relative}
+.pf-head .avatar{width:48px;height:48px;font-size:16px}
+.pf-name{font-size:16px;font-weight:700;margin-bottom:4px}
+.pf-close{position:absolute;right:14px;top:14px;border:0;background:none;font-size:15px;color:var(--muted)}
+.pf-body{margin:0;padding:10px 20px}
+.pf-row{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px dashed var(--border)}
+.pf-row:last-child{border:0}
+.pf-row dt{color:var(--muted)}
+.pf-row dd{margin:0;font-weight:600;text-align:right;overflow-wrap:anywhere}
+.pf-foot{display:flex;flex-wrap:wrap;gap:8px;padding:14px 20px;background:#f7f8fb;border-top:1px solid var(--border)}
+.pf-foot .ms-auto{margin-left:auto}
+
+@media (max-width:700px){.form-grid{grid-template-columns:1fr}}
+<<<<<<< HEAD
+@media print{.form-card{display:none!important}}
+=======
+@media print{.form-card{display:none!important}}
+
+/* Đổi giảng viên + lịch sử — nạp SAU advisor-classe-sections.css */
+.history-card{margin-top:16px}
+.hist-title{display:flex;align-items:center;gap:8px;margin:0;font-size:15px;font-weight:700;flex:1}
+.hist-title i{color:var(--primary)}
+.hist-wrap{max-height:380px;overflow:auto}
+.hist-table{min-width:900px}
+.hist-arrow{color:var(--muted);text-align:center;width:36px}
+.hist-reason{max-width:260px;overflow-wrap:anywhere}
+
+/* Hộp thoại đổi giảng viên */
+.chg-body{display:grid;gap:12px;padding:16px 20px}
+.chg-body textarea{height:auto;padding:8px 10px;resize:vertical;font:inherit}
+#changeDialog .title-icon{width:40px;height:40px;flex:none}
+
+/* Lịch sử trong hộp thoại hồ sơ */
+.pf-hist{padding:12px 20px;border-top:1px solid var(--border)}
+.pf-hist-title{display:flex;align-items:center;gap:6px;margin-bottom:8px;font-size:12.5px;font-weight:700}
+.pf-hist-wrap{max-height:180px;overflow:auto}
+.mini-table{width:100%;border-collapse:collapse;font-size:12px}
+.mini-table th,.mini-table td{padding:6px 8px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+.mini-table th{color:var(--muted);font-size:10.5px;font-weight:700}
+@media print{.history-card,#changeDialog{display:none!important}}
+<<<<<<< HEAD
+>>>>>>> eb686c79d9cf52aa7e68a7d25d39101fcd0344c8
+=======
+
+/* =========================================================
+   Dạy thay & ngày công — DÁN VÀO CUỐI advisor-classe-sections.css
+   ========================================================= */
+
+/* Thanh tab */
+.tabs{display:flex;gap:6px;margin-bottom:16px;border-bottom:1px solid var(--border)}
+.tab{display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 16px;border:0;background:none;
+     font-weight:600;font-size:13px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* Chuyển tab: ẩn khối CVHT khi ở tab dạy thay, và ngược lại */
+body.tab-sub .page > .kpi-grid:not(.sub-kpi),
+body.tab-sub #assignmentForm,
+body.tab-sub .page > .table-card:not(.sub-card),
+body.tab-sub #historyCard{display:none!important}
+body:not(.tab-sub) #subSection{display:none}
+.sub-card{margin-bottom:16px}
+.sub-table{min-width:980px}
+.sub-card .toolbar .hist-title{flex:1 1 100%}
+.sb-ok:hover{background:var(--green);border-color:var(--green);color:#fff}
+.sb-del:hover{background:var(--red);border-color:var(--red);color:#fff}
+.sb-err{color:var(--red);font-size:12px;min-height:16px}
+.sb-num{font-size:15px;color:var(--primary)}
+
+/* Tổng số ngày công */
+.total-box{display:flex;align-items:center;gap:20px;margin:14px 16px 0;padding:14px 18px;border-radius:10px;
+           background:var(--primary-soft);border:1px solid #cfe0fb}
+.total-box small{display:block;font-size:11px;font-weight:700;letter-spacing:.4px;color:var(--primary)}
+.total-box strong{font-size:34px;line-height:1.1;color:var(--primary)}
+.total-box p{margin:0;color:var(--muted);font-size:12px;max-width:560px}
+.two-tables{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.8fr);gap:16px;padding:16px}
+.sub-title{margin:0 0 8px;font-size:13px;font-weight:700}
+.data-table.narrow{min-width:0}
+@media (max-width:1100px){.two-tables{grid-template-columns:1fr}}
+
+/* Báo cáo xem trước + in */
+.sb-report-dlg{width:min(860px,95vw)}
+.rep-tools{display:flex;gap:8px;margin-left:auto;padding-right:30px}
+.sb-report-wrap{max-height:70vh;overflow:auto;background:#eef0f4;padding:16px}
+.report{background:#fff;padding:28px 32px;color:#111;font-family:"Times New Roman",Times,serif;font-size:14px;min-height:300px}
+.rp-head{text-align:center;margin-bottom:18px}
+.rp-school{font-weight:700;font-size:15px;text-transform:uppercase}
+.rp-head h2{margin:8px 0 4px;font-size:19px;font-weight:700}
+.rp-block{margin-bottom:18px;break-inside:avoid}
+.rp-block h4{margin:0 0 6px;font-size:14px}
+.rp-table{width:100%;border-collapse:collapse}
+.rp-table th,.rp-table td{border:1px solid #333;padding:5px 8px;text-align:left}
+.rp-table th{background:#f0f0f0;text-align:center}
+.rp-table td:first-child{text-align:center}
+.rp-total{text-align:right;margin-top:6px}
+.rp-grand{margin-top:14px;padding-top:10px;border-top:2px solid #333;text-align:right;font-size:15px}
+.rp-foot{display:flex;justify-content:space-between;margin-top:28px}
+.rp-sign{text-align:center}
+.rp-empty{text-align:center;color:#666;padding:30px 0}
+
+@media print{
+    body.print-sb-report .sm-sidebar,
+    body.print-sb-report .topbar,
+    body.print-sb-report .main,
+    body.print-sb-report .toast,
+    body.print-sb-report dialog:not(#sbReportDialog),
+    body.print-sb-report .rep-tools,
+    body.print-sb-report #sbReportDialog .pf-head{display:none!important}
+    body.print-sb-report #sbReportDialog{position:static;display:block;width:100%;max-width:none;box-shadow:none}
+    body.print-sb-report .sb-report-wrap{max-height:none;overflow:visible;padding:0;background:none}
+    body.print-sb-report .report{padding:0}
+    #subSection{display:none!important}
+}
+>>>>>>> 6d245789a5ebbbdef2d71ed6f3a893eb274cf45a

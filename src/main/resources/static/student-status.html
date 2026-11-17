@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý trạng thái sinh viên | SM University</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/assets/css/student-status.css?v=2">
+</head>
+<body>
+
+<!-- ============ SIDEBAR (đồng bộ với các trang khác) ============ -->
+<aside class="sm-sidebar">
+    <div class="sm-brand">
+        <a href="index.html" class="brand-link">
+            <span class="sm-logo">SM</span>
+            <span class="sm-brand-text"><strong>SM UNIVERSITY</strong><small>QL SINH VIÊN</small></span>
+        </a>
+    </div>
+    <div class="sm-section">Điều hành chính</div>
+    <ul class="sm-menu">
+        <li><a href="index.html" class="sm-link"><i class="bi bi-mortarboard"></i><span>Quản lý sinh viên</span></a></li>
+        <li><a href="student-classes.html" class="sm-link"><i class="bi bi-building"></i><span>Lớp học</span></a></li>
+        <li><a href="student-classe-sections.html" class="sm-link"><i class="bi bi-diagram-3"></i><span>Phân lớp sinh viên</span></a></li>
+        <li><a href="advisor-classe-sections.html" class="sm-link"><i class="bi bi-person-badge"></i><span>Giảng viên / CVHT</span></a></li>
+        <li><a href="student-status.html" class="sm-link active"><i class="bi bi-card-checklist"></i><span>Trạng thái sinh viên</span></a></li>
+    </ul>
+</aside>
+
+<!-- ============ HEADER ============ -->
+<header class="topbar">
+    <button class="icon-btn" id="sidebarToggle" aria-label="Thu gọn menu"><i class="bi bi-list"></i></button>
+
+    <div class="topbar-main">
+        <nav class="crumbs">
+            <i class="bi bi-house"></i>
+            <a href="index.html">Trang chủ</a><span>/</span>
+            <strong>Trạng thái sinh viên</strong>
+        </nav>
+
+        <label class="global-search">
+            <i class="bi bi-search"></i>
+            <input type="text" id="globalSearch" placeholder="Tìm kiếm sinh viên, lớp...">
+            <kbd>Ctrl+K</kbd>
+        </label>
+
+        <div class="today" id="todayText">--</div>
+    </div>
+
+    <div class="topbar-right">
+        <button class="btn-primary" id="btnAddNew"><i class="bi bi-plus-lg"></i> Thêm mới</button>
+        <button class="icon-btn has-badge" aria-label="Thông báo"><i class="bi bi-bell"></i><span class="badge">3</span></button>
+        <button class="icon-btn" aria-label="Trợ giúp"><i class="bi bi-question-circle"></i></button>
+        <div class="profile">
+            <div class="avatar avatar-blue"><i class="bi bi-person"></i></div>
+            <div><b>Quản trị viên</b><small>Phòng Đào tạo</small></div>
+        </div>
+    </div>
+</header>
+
+<!-- ============ MAIN ============ -->
+<main class="main">
+    <div class="page">
+
+        <!-- Tiêu đề trang -->
+        <section class="page-head">
+            <div class="page-title">
+                <div class="title-icon"><i class="bi bi-card-checklist"></i></div>
+                <div>
+                    <h1>Quản lý trạng thái sinh viên <span class="term-badge" id="termBadge">Học kỳ II · 2024/2025</span></h1>
+                    <p>Theo dõi và xử lý quy trình chuyển đổi trạng thái học vụ (Đang học, Bảo lưu, Thôi học, Tốt nghiệp) theo quy chế đào tạo đại học chính quy.</p>
+                </div>
+            </div>
+
+            <div class="page-actions">
+                <div class="dropdown" id="exportDropdown">
+                    <button class="btn-soft" id="btnExport"><i class="bi bi-download"></i> Xuất quyết định học vụ (PDF/Excel)</button>
+                    <div class="dropdown-menu" id="exportMenu">
+                        <button data-export="excel"><i class="bi bi-file-earmark-excel"></i> Xuất Excel</button>
+                        <button data-export="pdf"><i class="bi bi-file-earmark-pdf"></i> Xuất PDF (In)</button>
+                    </div>
+                </div>
+                <button class="btn-primary" id="btnUpdateStatus"><i class="bi bi-plus-circle"></i> Cập nhật trạng thái SV</button>
+            </div>
+        </section>
+
+        <!-- KPI -->
+        <section class="kpi-grid">
+            <article class="kpi kpi-green">
+                <header><span class="kpi-label"><i class="dot"></i>ĐANG HỌC</span><span class="kpi-icon"><i class="bi bi-mortarboard"></i></span></header>
+                <div class="kpi-value"><span id="kpiStudy">0</span><small>SV</small></div>
+                <footer><span class="kpi-note"><i class="bi bi-graph-up-arrow"></i> <b id="pctStudy">0%</b></span><span>Đúng tiến độ niên khóa</span></footer>
+                <div class="bar"><i id="barStudy"></i></div>
+            </article>
+
+            <article class="kpi kpi-yellow">
+                <header><span class="kpi-label"><i class="dot"></i>BẢO LƯU HỌC TẬP</span><span class="kpi-icon"><i class="bi bi-pause-circle"></i></span></header>
+                <div class="kpi-value"><span id="kpiSave">0</span><small>SV</small></div>
+                <footer><span class="kpi-note"><i class="bi bi-clock-history"></i> <b id="pctSave">0%</b></span><span>Tạm dừng có thời hạn</span></footer>
+                <div class="bar"><i id="barSave"></i></div>
+            </article>
+
+            <article class="kpi kpi-red">
+                <header><span class="kpi-label"><i class="dot"></i>THÔI HỌC / CẢNH BÁO</span><span class="kpi-icon"><i class="bi bi-exclamation-triangle"></i></span></header>
+                <div class="kpi-value"><span id="kpiWarn">0</span><small>SV</small></div>
+                <footer><span class="kpi-note"><i class="bi bi-exclamation"></i> <b id="pctWarn">0%</b></span><span>Cần xử lý thủ tục</span></footer>
+                <div class="bar"><i id="barWarn"></i></div>
+            </article>
+
+            <article class="kpi kpi-purple">
+                <header><span class="kpi-label"><i class="dot"></i>ĐÃ TỐT NGHIỆP</span><span class="kpi-icon"><i class="bi bi-award"></i></span></header>
+                <div class="kpi-value"><span id="kpiGrad">0</span><small>SV</small></div>
+                <footer><span class="kpi-note"><i class="bi bi-check-circle"></i> <b id="pctGrad">0%</b></span><span>Đã cấp văn bằng</span></footer>
+                <div class="bar"><i id="barGrad"></i></div>
+            </article>
+        </section>
+
+        <!-- Nội dung chính: bảng + phiếu cập nhật -->
+        <section class="content-grid">
+
+            <!-- ===== Bảng ===== -->
+            <div class="card table-card">
+                <div class="toolbar">
+                    <label class="field-search">
+                        <i class="bi bi-search"></i>
+                        <input type="text" id="searchInput" placeholder="Tìm theo Mã SV, họ tên,...">
+                    </label>
+                    <select id="typeFilter" class="select">
+                        <option value="ALL">Tất cả loại chuyển đổi</option>
+                        <option value="HOAT_DONG">→ Đang học</option>
+                        <option value="BAO_LUU">→ Bảo lưu</option>
+                        <option value="THOI_HOC">→ Thôi học</option>
+                        <option value="TOT_NGHIEP">→ Tốt nghiệp</option>
+                    </select>
+                    <select id="facultyFilter" class="select">
+                        <option value="ALL">Khoa / Viện: Tất cả</option>
+                    </select>
+                    <button class="icon-btn outline" id="btnFilterMore" aria-label="Bộ lọc nâng cao"><i class="bi bi-sliders"></i></button>
+                </div>
+
+                <div class="toolbar-sub" id="advancedFilters" hidden>
+                    <label>Từ ngày <input type="date" id="dateFrom"></label>
+                    <label>Đến ngày <input type="date" id="dateTo"></label>
+                    <button class="link-btn" id="btnClearFilters">Xóa bộ lọc</button>
+                </div>
+
+                <div class="meta-row">
+                    <span>Hiển thị <b id="shownCount">0</b> / <b id="totalCount">0</b> hồ sơ biến động</span>
+                    <span class="sync"><i class="bi bi-arrow-repeat"></i> <span id="syncText">Đồng bộ dữ liệu lúc --</span></span>
+                    <span class="legend">
+                        <i class="lg lg-green"></i>Đang học
+                        <i class="lg lg-yellow"></i>Bảo lưu
+                        <i class="lg lg-red"></i>Thôi học
+                        <i class="lg lg-purple"></i>Tốt nghiệp
+                    </span>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:48px">STT</th>
+                                <th>MÃ SV &amp; HỌ VÀ TÊN</th>
+                                <th>LỚP HC</th>
+                                <th>BIẾN ĐỘNG TRẠNG THÁI</th>
+                                <th>NGÀY HL</th>
+                                <th>QUYẾT ĐỊNH SỐ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="pager">
+                    <span id="pagerInfo">--</span>
+                    <div class="pager-btns" id="pagerBtns"></div>
+                </div>
+            </div>
+
+            <!-- ===== Phiếu cập nhật ===== -->
+            <aside class="card ticket" id="updatePanel">
+                <header class="ticket-head">
+                    <div class="ticket-title"><i class="bi bi-journal-check"></i> Phiếu cập nhật trạng thái</div>
+                    <span class="tag">Tác vụ học vụ</span>
+                </header>
+
+                <div class="step">
+                    <div class="step-title">
+                        <span>1. Sinh viên áp dụng</span>
+                        <a href="#" id="lookupLink">Tra cứu MSSV khác</a>
+                    </div>
+
+                    <div class="lookup" id="lookupBox" hidden>
+                        <input type="text" id="studentLookup" placeholder="Nhập MSSV / họ tên...">
+                        <div class="suggest" id="suggestBox"></div>
+                    </div>
+
+                    <div class="selected-student">
+                        <div class="avatar avatar-blue" id="selAvatar">SV</div>
+                        <div class="sel-info">
+                            <b id="selName">Chưa chọn sinh viên</b>
+                            <small id="selCode">Chọn từ bảng hoặc tra cứu MSSV</small>
+                        </div>
+                        <div class="sel-status">
+                            <small>Trạng thái hiện tại</small>
+                            <span class="pill" id="selStatus">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title"><span>2. Chọn trạng thái chuyển đổi mới <em>*</em></span></div>
+                    <div class="status-options" id="statusOptions"></div>
+                </div>
+
+                <div class="step two-col">
+                    <div>
+                        <label class="lbl">Ngày hiệu lực</label>
+                        <input type="date" id="fDate" class="input">
+                    </div>
+                    <div>
+                        <label class="lbl">Số quyết định</label>
+                        <input type="text" id="fDecision" class="input" placeholder="QĐ-315/ĐH-ĐT">
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-title"><span>3. Lý do điều chỉnh <em>*</em></span></div>
+                    <select id="fReason" class="select full"></select>
+
+                    <label class="lbl mt">Ghi chú &amp; Tóm tắt quyết định</label>
+                    <textarea id="fNote" class="input" rows="3" placeholder="Ghi rõ thông tin biên bản phê duyệt từ Hội đồng hoặc đơn xin phép kèm theo..."></textarea>
+                </div>
+
+                <div class="rule" id="ruleBox">
+                    <i class="bi bi-exclamation-circle"></i>
+                    <p></p>
+                </div>
+
+                <div class="ticket-actions">
+                    <button class="btn-soft" id="btnReset">Làm mới</button>
+                    <button class="btn-primary" id="btnSubmit"><i class="bi bi-check2-circle"></i> Lưu cập nhật</button>
+                </div>
+            </aside>
+        </section>
+    </div>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="/assets/js/student-status.js?v=3"></script>
+</body>
+</html>
