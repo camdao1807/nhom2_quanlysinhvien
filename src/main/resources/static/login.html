@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập | SM University</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/index.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <link rel="stylesheet" href="/assets/css/login.css" />
+  </head>
+
+  <body class="login-body">
+    <main class="login-card">
+      <div class="login-brand">
+        <span class="login-logo">SM</span>
+        <div>
+          <b>SM UNIVERSITY</b>
+          <small>QL SINH VIÊN</small>
+        </div>
+      </div>
+
+      <h1>Đăng nhập quản trị</h1>
+      <p class="login-sub">Dành cho cán bộ Phòng Đào tạo.</p>
+
+      <div class="login-alert" id="loginError" hidden>
+        <i class="bi bi-exclamation-circle"></i>
+        <span id="loginErrorText">Sai tên đăng nhập hoặc mật khẩu.</span>
+      </div>
+
+      <form method="post" action="/login" id="loginForm" novalidate>
+        <label class="login-label" for="username">Tên đăng nhập</label>
+        <div class="login-input">
+          <i class="bi bi-person"></i>
+          <input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập" autocomplete="username" autofocus required />
+        </div>
+
+        <label class="login-label" for="password">Mật khẩu</label>
+        <div class="login-input">
+          <i class="bi bi-lock"></i>
+          <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" autocomplete="current-password" required />
+          <button type="button" class="login-eye" id="togglePw" aria-label="Hiện/ẩn mật khẩu">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+
+        <button type="submit" class="login-btn" id="loginBtn">
+          <i class="bi bi-box-arrow-in-right"></i> Đăng nhập
+        </button>
+      </form>
+
+      <div class="login-foot">© SM University · Hệ thống quản lý đào tạo</div>
+    </main>
+
+    <script>
+      // Hiện thông báo khi Spring Security chuyển về /login.html?error hoặc ?logout
+      const params = new URLSearchParams(location.search);
+      const box = document.getElementById('loginError');
+      const text = document.getElementById('loginErrorText');
+      if (params.has('error')) {
+        box.hidden = false;
+      } else if (params.has('logout')) {
+        box.hidden = false;
+        box.classList.add('ok');
+        box.querySelector('i').className = 'bi bi-check-circle';
+        text.textContent = 'Bạn đã đăng xuất.';
+      }
+
+      // Hiện / ẩn mật khẩu
+      const pw = document.getElementById('password');
+      document.getElementById('togglePw').addEventListener('click', (e) => {
+        const show = pw.type === 'password';
+        pw.type = show ? 'text' : 'password';
+        e.currentTarget.querySelector('i').className = show ? 'bi bi-eye-slash' : 'bi bi-eye';
+      });
+
+      // Kiểm tra trống trước khi gửi
+      document.getElementById('loginForm').addEventListener('submit', (e) => {
+        if (!document.getElementById('username').value.trim() || !pw.value) {
+          e.preventDefault();
+          box.hidden = false;
+          box.classList.remove('ok');
+          text.textContent = 'Vui lòng nhập tên đăng nhập và mật khẩu.';
+        }
+      });
+    </script>
+  </body>
+</html>

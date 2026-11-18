@@ -1,89 +1,4 @@
 /* =========================================================
-<<<<<<< HEAD
-<<<<<<< HEAD
-   student.css - trang Quản lý sinh viên
-   Dòng đầu tiên nhúng layout chung (sidebar + topbar)
-   ========================================================= */
-@import url("layout.css?v=3");
-
-/* ===== Khung nội dung ===== */
-.app-content-header{padding:20px 22px 0}
-.app-content{padding:0 22px 30px}
-.page-title{font-weight:700;font-size:22px}
-.card{border-radius:10px;border:1px solid var(--border);background:var(--card)}
-
-/* ===== Nút & ô nhập ===== */
-.btn{font-size:13px;height:38px}
-.btn-sm{height:32px}
-.btn-primary{--bs-btn-bg:var(--primary);--bs-btn-border-color:var(--primary);--bs-btn-hover-bg:var(--primary-dark);--bs-btn-hover-border-color:var(--primary-dark);--bs-btn-active-bg:var(--primary-dark);font-weight:600;border-radius:7px}
-.btn-outline-primary{--bs-btn-color:var(--primary);--bs-btn-border-color:var(--primary);--bs-btn-hover-bg:var(--primary);--bs-btn-hover-border-color:var(--primary);font-weight:600;border-radius:7px}
-.form-control,.form-select{font-size:13px;height:38px;border-color:var(--border);border-radius:7px;background-color:#fff}
-textarea.form-control{height:auto}
-.form-control:focus,.form-select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(23,105,224,.1)}
-
-/* ===== Badge trạng thái ===== */
-.badge{display:inline-block;min-width:0;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:600;line-height:1.2;text-align:center}
-.badge.bg-success{background:var(--green-soft)!important;color:var(--green)!important}
-.badge.bg-warning{background:var(--yellow-soft)!important;color:#c98512!important}
-.badge.bg-danger{background:var(--red-soft)!important;color:var(--red)!important}
-.badge.bg-primary{background:var(--purple-soft)!important;color:var(--purple)!important}
-.badge.bg-info{background:var(--primary-soft)!important;color:var(--primary)!important}
-.badge.bg-secondary{background:#eef0f4!important;color:#6b7280!important}
-
-/* ===== Phân trang ===== */
-.pagination .page-link{cursor:pointer;font-size:12px;color:var(--muted);border-color:var(--border)}
-.pagination .active .page-link{background:var(--primary);border-color:var(--primary);color:#fff}
-
-/* ===== Thẻ thống kê ===== */
-.stat{padding:16px 18px;height:100%;border-radius:10px;border:1px solid var(--border);background:var(--card)}
-.stat-top{display:flex;justify-content:space-between;align-items:flex-start}
-.stat-label{font-size:11px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:#4b5563}
-.stat-num{font-size:32px;font-weight:700;line-height:1;margin-top:8px}
-.stat-ico{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font-size:17px;background:var(--primary-soft);color:var(--primary)}
-.stat.s-ok .stat-ico{background:var(--green-soft);color:var(--green)}
-.stat.s-warn .stat-ico{background:var(--yellow-soft);color:var(--yellow)}
-.stat.s-danger .stat-ico{background:var(--red-soft);color:var(--red)}
-.stat.s-purple .stat-ico,.stat.s-gray .stat-ico{background:var(--purple-soft);color:var(--purple)}
-.stat-foot{margin-top:12px;padding:6px 10px;background:#f7f8fb;border-radius:8px;font-size:11px;color:var(--muted);display:flex;justify-content:space-between}
-.stat-foot b{color:var(--primary)}
-.stat.s-gray .stat-foot b{color:var(--purple)}
-
-/* ===== Bộ lọc ===== */
-.filter-title{color:var(--primary);font-weight:600}
-.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
-.chip{display:inline-flex;align-items:center;gap:6px;background:var(--primary-soft);color:var(--primary);padding:4px 10px;border-radius:6px;font-weight:600}
-.chip button{border:0;background:transparent;color:inherit;padding:0;font-size:14px;line-height:1}
-.clear-all{border:0;background:transparent;color:var(--primary);font-weight:600;font-size:12px;padding:0}
-
-/* ===== Bảng ===== */
-.student-table thead th{background:#f7f8fb;font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;padding:11px 14px;border-bottom:1px solid var(--border)}
-.student-table td{padding:14px;vertical-align:middle;border-bottom:1px solid #eef0f4;font-size:14px}
-.student-table tbody tr:hover{background:#f8fafd}
-.student-table td:nth-child(7){font-size:13px;font-weight:500;color:#374151}
-.student-table td:nth-child(7) .sub{font-weight:400}
-.code{display:inline-block;background:var(--primary-soft);color:var(--primary);font-family:ui-monospace,Consolas,monospace;font-weight:700;padding:3px 8px;border-radius:5px;font-size:12px}
-.person{display:flex;align-items:center;gap:10px;min-width:190px}
-.p-avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-size:12px;flex:none}
-.p-name{font-weight:600;font-size:14px}
-.sub{display:block;font-size:11px;color:var(--faint)}
-.class-chip{display:inline-block;background:#eef0ff;color:#4f46e5;padding:3px 8px;border-radius:5px;font-weight:700;font-size:11px;white-space:nowrap}
-.btn-view{width:32px;height:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:7px;border:1px solid var(--border);background:#fff;color:var(--text)}
-.btn-view:hover{border-color:var(--primary);color:var(--primary)}
-
-/* ===== Chi tiết hồ sơ ===== */
-#detailBody .card-title{font-size:15px;font-weight:700}
-#detailBody .card-title i{color:var(--primary)}
-#detailBody .fw-semibold{word-break:break-word}
-
-/* ===== Modal thêm sinh viên ===== */
-.sm-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:2000}
-.sm-overlay.show{display:flex}
-.sm-modal{width:100%;max-width:760px;max-height:92vh;overflow:auto;background:#fff;border-radius:10px;border:1px solid var(--border);box-shadow:0 20px 50px rgba(15,23,42,.25)}
-.sm-modal-head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);font-weight:700}
-.sm-close{border:0;background:transparent;color:var(--muted);font-size:28px;line-height:1;cursor:pointer}
-.sm-modal-body{padding:20px}
-.sm-modal-foot{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid var(--border)}
-=======
    SM University - Quản lý sinh viên (bổ sung)
    Dùng kèm student-status.css (giao diện chuẩn)
    ========================================================= */
@@ -158,82 +73,6 @@ textarea.form-control{height:auto}
 .detail-state{padding:40px 10px;text-align:center;color:var(--muted)}
 @media (max-width:700px){.info-grid{grid-template-columns:1fr}}
 
-=======
-   SM University - Quản lý sinh viên (bổ sung)
-   Dùng kèm student-status.css (giao diện chuẩn)
-   ========================================================= */
-
-/* ---------- KPI 5 thẻ ---------- */
-.kpi-grid.five{grid-template-columns:repeat(5,1fr)}
-.kpi-blue{--c:var(--primary);--cs:var(--primary-soft)}
-.kpi-gray{--c:#64748b;--cs:#eef0f4}
-@media (max-width:1400px){.kpi-grid.five{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:900px){.kpi-grid.five{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:560px){.kpi-grid.five{grid-template-columns:1fr}}
-
-/* ---------- Bộ lọc ---------- */
-.toolbar .select{min-width:140px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:4px}
-.chip{
-    display:inline-flex;align-items:center;gap:6px;background:var(--primary-soft);color:var(--primary);
-    padding:3px 9px;border-radius:6px;font-weight:600;font-size:11.5px;
-}
-.chip button{border:0;background:transparent;color:inherit;padding:0;font-size:14px;line-height:1}
-.clear-all{border:0;background:transparent;color:var(--primary);font-weight:600;font-size:11.5px;padding:0}
-
-/* ---------- Bảng ---------- */
-.student-table{min-width:1000px}
-.code{
-    display:inline-block;background:var(--primary-soft);color:var(--primary);
-    font-family:ui-monospace,Consolas,monospace;font-weight:700;padding:3px 8px;border-radius:5px;font-size:12px;
-}
-.person{display:flex;align-items:center;gap:10px;min-width:180px}
-.p-avatar{
-    width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
-    color:#fff;font-weight:700;font-size:12px;flex:none;
-}
-.p-name{font-weight:600;font-size:13px}
-.sub{display:block;font-size:11px;color:var(--faint)}
-.col-actions{text-align:right;white-space:nowrap}
-.btn-view{
-    width:30px;height:30px;display:inline-grid;place-items:center;border-radius:7px;
-    border:1px solid var(--border);color:#4b5563;background:#fff;
-}
-.btn-view:hover{border-color:var(--primary);color:var(--primary)}
-.btn-restore{
-    display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 10px;border-radius:7px;
-    border:1px solid transparent;background:var(--green);color:#fff;font-size:12px;font-weight:600;
-}
-.btn-danger{background:var(--red);color:#fff}
-.btn-danger:hover{background:#d93046}
-
-/* ---------- Hồ sơ chi tiết ---------- */
-.profile-head{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:18px;margin-bottom:16px}
-.profile-head .p-avatar{width:64px;height:64px;font-size:22px}
-.profile-head h2{margin:0 0 4px;font-size:18px}
-.profile-head .grow{flex:1}
-.profile-head .muted{color:var(--muted)}
-.profile-head .right{text-align:right}
-.profile-head .right small{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}
-
-.sec-card{margin-bottom:16px}
-.sec-head{
-    display:flex;align-items:center;gap:9px;padding:13px 18px;border-bottom:1px solid var(--border);
-    font-size:14px;font-weight:700;
-}
-.sec-head i{
-    width:26px;height:26px;border-radius:6px;background:var(--primary-soft);color:var(--primary);
-    display:grid;place-items:center;font-size:14px;
-}
-.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px;padding:18px}
-.info-label{font-size:11px;color:var(--muted);margin-bottom:3px}
-.info-value{font-weight:600;word-break:break-word}
-.info-value .muted{color:var(--faint);font-weight:400}
-.detail-actions{display:flex;gap:8px;margin-bottom:20px}
-.detail-state{padding:40px 10px;text-align:center;color:var(--muted)}
-@media (max-width:700px){.info-grid{grid-template-columns:1fr}}
-
->>>>>>> eb686c79d9cf52aa7e68a7d25d39101fcd0344c8
 /* ---------- Modal ---------- */
 .sm-overlay{
     position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;
@@ -257,9 +96,26 @@ textarea.form-control{height:auto}
 .form-grid .span2{grid-column:1/-1}
 .lbl em{color:var(--red);font-style:normal}
 .form-error{color:var(--red);font-size:12px;margin-top:12px;min-height:1em}
-<<<<<<< HEAD
 @media (max-width:600px){.form-grid{grid-template-columns:1fr}}
->>>>>>> 525903d4e27346152039c3f38553f1f338791efa
-=======
-@media (max-width:600px){.form-grid{grid-template-columns:1fr}}
->>>>>>> eb686c79d9cf52aa7e68a7d25d39101fcd0344c8
+
+/* ---------- Menu tài khoản + Đăng xuất ---------- */
+.profile-wrap{position:relative}
+button.profile{
+    background:none;border:0;color:inherit;font:inherit;text-align:left;
+    cursor:pointer;display:flex;align-items:center;gap:10px;
+}
+button.profile > i{font-size:12px;opacity:.7}
+.profile-menu{
+    position:absolute;right:0;top:calc(100% + 8px);min-width:190px;
+    background:#12161f;border:1px solid rgba(255,255,255,.1);
+    border-radius:10px;padding:6px;z-index:300;
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+.profile-menu[hidden]{display:none}
+.profile-menu-item{
+    width:100%;display:flex;align-items:center;gap:10px;
+    padding:10px 12px;background:none;border:0;border-radius:8px;
+    color:inherit;font:inherit;font-size:13px;cursor:pointer;text-align:left;
+}
+.profile-menu-item:hover{background:rgba(255,255,255,.06)}
+.profile-menu-item.danger{color:#f87171}

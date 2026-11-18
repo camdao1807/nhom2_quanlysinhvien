@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.hibernate.annotations.Nationalized;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -31,6 +33,7 @@ public class StudentStatusRecord {
     @Column(name = "status_code")
     private String statusCode;
 
+    @Nationalized
     @Column(name = "status_name")
     private String statusName;
 
@@ -40,9 +43,11 @@ public class StudentStatusRecord {
     @Column(name = "end_date")
     private LocalDate endDate;
 
+    @Nationalized
     @Column(name = "description")
     private String description;
 
+    @Nationalized
     @Column(name = "reason")
     private String reason;
 
