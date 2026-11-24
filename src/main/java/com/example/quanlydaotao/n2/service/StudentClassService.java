@@ -25,8 +25,8 @@ public class StudentClassService {
 
         if (search != null && !search.trim().isEmpty()) {
             String keyword = search.trim();
-            return studentClassRepository.findByCodeContainingIgnoreCaseOrNameContainingIgnoreCase(keyword, keyword,
-                    pageable);
+            return studentClassRepository.findByCodeContainingIgnoreCaseOrNameContainingIgnoreCase(
+                    keyword, keyword, pageable);
         }
 
         return studentClassRepository.findAll(pageable);
@@ -44,6 +44,9 @@ public class StudentClassService {
         if (studentClass.getStatus() == null) {
             studentClass.setStatus("on");
         }
+        if (studentClass.getMaxSize() == null || studentClass.getMaxSize() < 1) {
+            studentClass.setMaxSize(40);
+        }
         return studentClassRepository.save(studentClass);
     }
 
@@ -59,6 +62,9 @@ public class StudentClassService {
 
         if (details.getName() != null) {
             existingClass.setName(details.getName());
+        }
+        if (details.getMaxSize() != null && details.getMaxSize() > 0) {
+            existingClass.setMaxSize(details.getMaxSize());
         }
         if (details.getAcademicYearId() != null) {
             existingClass.setAcademicYearId(details.getAcademicYearId());

@@ -73,7 +73,7 @@ async function loadClasses() {
                 year: m ? 2000 + Number(m[1]) : 0,
                 teacher: teacherByClass.get(String(c.id).toLowerCase()) || '',
                 size: students.filter(s => inClass(s, c)).length,
-                max: 40,
+                max: c.maxSize || 40,
                 status: c.status || 'on'
             };
         });
@@ -207,8 +207,15 @@ function openEdit(i) {
 }
 
 async function saveClass() {
-    const d = { code: $('mCode').value.trim(), name: $('mName').value.trim(), status: $('mStatus').value };
+    const max = Number($('mMax').value);
+    const d = {
+        code: $('mCode').value.trim(),
+        name: $('mName').value.trim(),
+        status: $('mStatus').value,
+        maxSize: max
+    };
     if (!d.code || !d.name) { $('mErr').textContent = 'Vui lòng nhập mã lớp và tên lớp.'; return; }
+    if (!Number.isInteger(max) || max < 1) { $('mErr').textContent = 'Sĩ số tối đa phải là số nguyên lớn hơn 0.'; return; }
     if (classes.some((c, i) => c.code === d.code && i !== editing)) { $('mErr').textContent = 'Mã lớp đã tồn tại.'; return; }
     const isNew = editing === null;
     try {

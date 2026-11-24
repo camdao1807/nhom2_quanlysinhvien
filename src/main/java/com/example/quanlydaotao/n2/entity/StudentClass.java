@@ -12,12 +12,16 @@ public class StudentClass {
     private UUID id;
 
     @Column(name = "status")
-    private String status = "on"; 
+    private String status = "on";
 
     @Column(name = "code", unique = true)
     private String code;
+
     @Column(name = "name")
     private String name;
+
+    @Column(name = "max_size")
+    private Integer maxSize = 40;
 
     @Column(name = "academic_year_id")
     private UUID academicYearId;
@@ -35,51 +39,24 @@ public class StudentClass {
         this.departmentId = departmentId;
     }
 
-    public UUID getId() {
-        return id;
-    }
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    public String getCode() { return code; }
+    public void setCode(String code) { this.code = code; }
 
-    public String getCode() {
-        return code;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+    public Integer getMaxSize() { return maxSize; }
+    public void setMaxSize(Integer maxSize) { this.maxSize = maxSize; }
 
-    public String getName() {
-        return name;
-    }
+    public UUID getAcademicYearId() { return academicYearId; }
+    public void setAcademicYearId(UUID academicYearId) { this.academicYearId = academicYearId; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public UUID getDepartmentId() { return departmentId; }
+    public void setDepartmentId(UUID departmentId) { this.departmentId = departmentId; }
 
-    public UUID getAcademicYearId() {
-        return academicYearId;
-    }
-
-    public void setAcademicYearId(UUID academicYearId) {
-        this.academicYearId = academicYearId;
-    }
-
-    public UUID getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(UUID departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }
