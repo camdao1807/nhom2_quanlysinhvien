@@ -61,7 +61,7 @@ async function loadTeachers() {
     } catch (e) { console.error('Không tải được giảng viên:', e); }
 }
 
-async function loadClasses() {
+async function loadClasses(keepPage = false) {
     let failed = false;
     try {
         const data = unwrap(await getJson(API + '?size=1000'));
@@ -85,7 +85,7 @@ async function loadClasses() {
     }
     $('syncText').textContent = failed ? 'Đồng bộ thất bại'
         : 'Đồng bộ dữ liệu lúc ' + new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
-    refresh();
+    refresh(keepPage);
 }
 
 /* ========== Giao diện ========== */
@@ -120,12 +120,14 @@ function renderStats() {
         </article>`).join('');
 }
 
-function applyFilters() {
+// keepPage = true: giữ nguyên trang hiện tại (dùng sau khi lưu/xóa).
+// Các listener truyền vào event nên (keepPage !== true) -> vẫn về trang 1 khi đổi bộ lọc.
+function applyFilters(keepPage = false) {
     const q = $('fSearch').value.trim().toLowerCase(), st = $('fStatus').value, y = $('fYear').value, t = $('fTeacher').value;
     filtered = classes.map((c, i) => ({ ...c, i })).filter(c =>
         (!q || c.code.toLowerCase().includes(q) || c.name.toLowerCase().includes(q)) &&
         (!st || c.status === st) && (!y || String(c.year) === y) && (!t || c.teacher === t));
-    page = 1;
+    if (keepPage !== true) page = 1;
     renderTable();
 }
 
@@ -176,7 +178,7 @@ function renderPager(pages) {
     mk('<i class="bi bi-chevron-right"></i>', page === pages, false, () => { page++; renderTable(); });
 }
 
-function refresh() { fillFilters(); renderStats(); applyFilters(); }
+function refresh(keepPage = false) { fillFilters(); renderStats(); applyFilters(keepPage); }
 
 /* ========== Danh sách sinh viên của lớp ========== */
 function openStudents(i) {
@@ -226,7 +228,7 @@ async function saveClass() {
         });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         $('classDialog').close();
-        await loadClasses();
+        await loadClasses(true);   // giữ nguyên trang hiện tại
         toast(isNew ? 'Đã thêm lớp học.' : 'Đã cập nhật lớp học.');
     } catch (err) {
         $('mErr').textContent = 'Không lưu được: ' + err.message;
@@ -238,7 +240,7 @@ async function removeClass(i) {
     try {
         const res = await fetch(`${API}/${classes[i].id}`, { method: 'DELETE' });
         if (!res.ok) throw new Error();
-        await loadClasses();
+        await loadClasses(true);   // giữ nguyên trang hiện tại
         toast('Đã xóa lớp học.');
     } catch {
         toast('Không xóa được lớp này (có thể đang có sinh viên thuộc lớp).', 'error');
