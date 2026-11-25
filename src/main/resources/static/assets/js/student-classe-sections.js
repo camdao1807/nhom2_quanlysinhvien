@@ -29,7 +29,7 @@
             });
         }
     };
-    const DEFAULT_CAPACITY = 70;
+    const DEFAULT_CAPACITY = 40;   // [ĐỔI] 70 -> 40, khớp với trang Lớp học
     const PAGE_SIZE = 10;   // số sinh viên mỗi trang
 
     /* ---------- Chuẩn hóa dữ liệu (nhận cả camelCase lẫn snake_case) ---------- */
@@ -115,8 +115,8 @@
         const advisor = pick(c, 'employeeName', 'advisorName', 'advisor_name', 'homeroomTeacherName', 'gvcn', 'gvcnName', 'teacherName', 'cvhtName') ||
             emp.fullName || emp.full_name || emp.name || emp.employeeName ||
             scanKey(c, /(advisor|gvcn|cvht|teacher|homeroom|lecturer|employee|instructor).*(name|ten)|^(gvcn|cvht|advisor|teacher|homeroom|lecturer)$/i, isStr);
-        const max = Number(pick(c, 'maxStudents', 'max_students', 'capacity', 'quota', 'maxSize', 'maxCapacity')) ||
-            scanKey(c, /max|capacity|quota|toi.?da/i, isNum) || DEFAULT_CAPACITY;
+        // [ĐỔI] ưu tiên maxSize (sĩ số tối đa đặt ở trang Lớp học), bỏ bước đoán tên trường
+        const max = Number(pick(c, 'maxSize', 'max_size', 'maxStudents', 'max_students', 'capacity', 'quota', 'maxCapacity')) || DEFAULT_CAPACITY;
         const id = pick(c, 'id');
         return {
             id: id,
@@ -589,7 +589,9 @@ tr.row-selected td{background:#eaf1ff}
             setText('statPendingPct', (total ? pend / total * 100 : 0).toFixed(1) + '%');
             setText('statClasses', classes.length);
             const avg = classes.length ? (classes.reduce((a, c) => a + curOf(c), 0) / classes.length).toFixed(1) : '0';
-            setText('statClassNote', 'Sĩ số TB ' + avg + ' • Định mức tối đa ' + DEFAULT_CAPACITY);
+            // [ĐỔI] hiển thị sĩ số tối đa thực tế thay vì ghi cứng 70
+            const maxCap = classes.length ? Math.max.apply(null, classes.map((c) => c.max)) : DEFAULT_CAPACITY;
+            setText('statClassNote', 'Sĩ số TB ' + avg + ' • Định mức tối đa ' + maxCap);
         }
 
         const setWidth = (id, pct) => { const el = $(id); if (el) el.style.width = Math.max(0, Math.min(100, pct)) + '%'; };
